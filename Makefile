@@ -73,7 +73,7 @@ release:
 	git push --tags --force
 
 	# updating CHANGELOG
-	make update-changelog
+	make changelog
 
 	# create github release
 	python update_release.py publish
@@ -92,7 +92,7 @@ push-qa:
 	git push --tags --force
 
 	# updating CHANGELOG
-	make update-changelog
+	make changelog
 
 push-prod:
 	@# confirm push to production
@@ -103,4 +103,4 @@ push-prod:
 	git push --tags --force
 
 	# updating CHANGELOG
-	make update-changelog
+	make changelog
