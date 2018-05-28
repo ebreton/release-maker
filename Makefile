@@ -34,12 +34,12 @@ include .env
 export
 endif
 
+pull:
+	docker pull ferrarimarco/github-changelog-generator
+
 ps:
 	# A lightly formatted version of docker ps
 	docker ps --format 'table {{.Names}}\t{{.Image}}\t{{.Status}} ago'
-
-pull:
-	docker pull ferrarimarco/github-changelog-generator
 
 changelog:
 	@echo updating CHANGELOG...
