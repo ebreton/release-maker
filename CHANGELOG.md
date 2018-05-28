@@ -1,5 +1,8 @@
 # Change Log
 
+## [qa-release](https://github.com/ebreton/release-maker/tree/qa-release) (2018-05-28)
+[Full Changelog](https://github.com/ebreton/release-maker/compare/0.1.0...qa-release)
+
 ## [0.1.0](https://github.com/ebreton/release-maker/tree/0.1.0) (2018-05-28)
 
 
