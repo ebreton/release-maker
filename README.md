@@ -1,7 +1,7 @@
 Release-maker
 =
 
-> The best way to enforce a diamond-solid process... is to automate it
+> The best way to make a diamond-solid process... is to automate it
 
 Table of Content
 --
@@ -12,6 +12,9 @@ Table of Content
 - [Pre-requisites](#pre-requisites)
 - [Setup](#setup)
 - [Usage](#usage)
+- [As a bonus](#as-a-bonus)
+    - [git hook: automatic update/upgrade versions](#git-hook-automatic-updateupgrade-versions)
+    - [git tags: continuous integration and continuous deployment](#git-tags-continuous-integration-and-continuous-deployment)
 
 <!-- /TOC -->
 
@@ -46,7 +49,7 @@ The script depends on the existence of (at least) one git tag. If you have none,
     git tag 0.1.0
     git push --tags
 
-In order to publish release to github, the python library requests needs to be installed. `pip install` will do, preferably within a virtual environment. A *Pipfile* is provided for this purpose
+In order to publish release to github, the python library `requests` needs to be installed. `pip install` will do, preferably within a virtual environment. A *Pipfile* is provided for this purpose
 
     $ pipenv install
     ...
@@ -62,14 +65,14 @@ Command | Description | remarks
  `make vars` | display value of environment variables | requires *.env* file
  `make pull` | pull last docker image of github-changelog-generator | -
  `make ps` | list docker containers (with less information than docker ps) | -
- `make changelog` | builds new version of Changelog according to tags and PRs | valid environment variables must be defined in .env (or environment)
+ <code>make&nbsp;changelog</code> | builds new version of Changelog according to tags and PRs | valid environment variables must be defined in .env (or environment)
  `make release` | after confirmation of version number, execute all release process. | must be executed in branch **master**
  `make push-qa` | update tag **qa-release** and rebuild Changelog | -
  `make push-prod` | update tag q**a-release** and rebuild Changelog | ask confirmation of branch and version
 
- ## As a bonus
+## As a bonus
 
- ### git hook: automatic upgrade build and commit releases
+### git hook: automatic update/upgrade versions
 
 $ cp update_release.py .git/hooks/post-commit
 
@@ -82,7 +85,7 @@ Just make sure that your python executable is aligned with the one declared in t
     $ vi .git/hooks/post-commit
     ...
 
- ### git tags: continuous integration and continuous deployment
+### git tags: continuous integration and continuous deployment
 
     $ make push-qa
     ...
