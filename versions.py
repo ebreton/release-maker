@@ -3,14 +3,14 @@
 
 # the release comes from git and should not be modified
 # => read-only
-_release = '0.1.0'
+_release = '0.1.0-12-g5026db3'
 
 # you can set the next version number manually
 # if you do not, the system will make sure that version > release
 # => read-write, >_release
-_version = '0.1.0'
+_version = '0.1.1-rc'
 
 # the build number will generate conflicts on each PR merge
 # just keep yours every time
 # => read-only
-_build = '0f9875ebb797a219e19a617d55dbe244b63498ce'
+_build = '5026db3b8b001c5d8991c90d0528161abec7bbeb'
