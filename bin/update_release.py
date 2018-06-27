@@ -29,8 +29,8 @@ import argparse
 from pprint import pprint
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-COPY_PATH = os.path.sep.join([BASE_DIR, 'src', 'myapp', 'versions.py'])
 
+# handle case where the script is used as a git hook
 if BASE_DIR.endswith('hooks'):
     BASE_DIR = os.path.abspath(os.path.sep.join(
         [BASE_DIR, '..', '..']))

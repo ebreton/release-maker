@@ -24,7 +24,8 @@ version:
 	@echo ''
 	@echo Updating release numbers...
 	@docker run --rm -it \
-		-v $(PWD):/usr/src/app \
+		-v $(PWD)/.git:/usr/src/app/.git \
+		-v $(PWD)/versions.py:/usr/src/app/versions.py \
 		-v $(PWD)/bin/update_release.py:/usr/src/app/update_release.py \
 		python-requests update_release.py
 
@@ -71,13 +72,15 @@ changelog: check-env
 check-release: check-env
 	# make sure we are in master
 	@docker run --rm -it \
-		-v $(PWD):/usr/src/app \
+		-v $(PWD)/.git:/usr/src/app/.git \
+		-v $(PWD)/versions.py:/usr/src/app/versions.py \
 		-v $(PWD)/bin/update_release.py:/usr/src/app/update_release.py \
 		python-requests update_release.py check --branch=master
 
 	# update versions and ask for confirmation
 	@docker run --rm -it \
-		-v $(PWD):/usr/src/app \
+		-v $(PWD)/.git:/usr/src/app/.git \
+		-v $(PWD)/versions.py:/usr/src/app/versions.py \
 		-v $(PWD)/bin/update_release.py:/usr/src/app/update_release.py \
 		python-requests update_release.py
 
@@ -90,7 +93,8 @@ check-release: check-env
 	@echo Version used will be $(VERSION)
 
 	@docker run --rm -it \
-		-v $(PWD):/usr/src/app \
+		-v $(PWD)/.git:/usr/src/app/.git \
+		-v $(PWD)/versions.py:/usr/src/app/versions.py \
 		-v $(PWD)/bin/update_release.py:/usr/src/app/update_release.py \
 		python-requests update_release.py confirm
 
@@ -110,8 +114,13 @@ release: check-release
 
 	# create github release
 	@docker run --rm -it \
-		-v $(PWD):/usr/src/app \
+		-v $(PWD)/.git:/usr/src/app/.git \
+		-v $(PWD)/versions.py:/usr/src/app/versions.py \
 		-v $(PWD)/bin/update_release.py:/usr/src/app/update_release.py \
+		-e GITHUB_USER=${GITHUB_USER} \
+		-e GITHUB_OWNER=${GITHUB_OWNER} \
+		-e GITHUB_REPO=${GITHUB_REPO} \
+		-e GITHUB_KEY=${GITHUB_KEY} \
 		python-requests update_release.py publish
 
 	# git merge master
@@ -130,7 +139,8 @@ push-qa:
 push-prod:
 	@# confirm push to production
 	@docker run --rm -it \
-		-v $(PWD):/usr/src/app \
+		-v $(PWD)/.git:/usr/src/app/.git \
+		-v $(PWD)/versions.py:/usr/src/app/versions.py \
 		-v $(PWD)/bin/update_release.py:/usr/src/app/update_release.py \
 		python-requests update_release.py confirm --prod
 
