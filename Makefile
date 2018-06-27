@@ -64,9 +64,17 @@ changelog: check-env
 		ferrarimarco/github-changelog-generator \
 		-u ${GITHUB_OWNER} -p ${GITHUB_REPO} -t ${CHANGELOG_GITHUB_TOKEN}
 
+	# update versions
+	@docker run --rm -it \
+		-v $(PWD)/.git:/usr/src/app/.git \
+		-v $(PWD)/versions.py:/usr/src/app/versions.py \
+		-v $(PWD)/bin/update_release.py:/usr/src/app/update_release.py \
+		python-requests update_release.py
+
 	# commit master
 	git add CHANGELOG.md
-	git commit -m "updated CHANGELOG"
+	git add versions.py
+	git commit -m "updated CHANGELOG (and version numbers)"
 	git push
 
 check-release: check-env
