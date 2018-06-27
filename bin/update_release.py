@@ -124,10 +124,9 @@ except: pass
 
 
 def confirm_release():
-    print("version currently set to {}".format(_version))
     answer = ""
     while answer not in ["y", "n"]:
-        answer = input("OK to push to continue [Y/N]? ").lower()
+        answer = input("OK to push to continue [y/n]? ").lower()
     if answer != "y":
         raise SystemExit("Please confirm version number to continue")
 
